@@ -11,7 +11,7 @@ function App() {
    // Define recursive function to print nested values
    function printCity1Values(data) {
       
-      var mainContainer = document.getElementById("myInner1");
+      var mainContainer = document.getElementById("myResult1");
       mainContainer.innerHTML = '';
       var div = document.createElement("div");
 
@@ -34,7 +34,7 @@ function App() {
    function printCity2Values(data) {
 
       var div = document.createElement("div");
-      var mainContainer = document.getElementById("myInner2");
+      var mainContainer = document.getElementById("myResult2");
       mainContainer.innerHTML = '';
       
       for(var k in data) {
@@ -52,8 +52,110 @@ function App() {
 };
 
   const handleSubmit = event => {
-
     event.preventDefault();
+
+    if (city1 === '') {
+      //print error
+      let div1 = document.createElement("div");
+      let mainContainer1 = document.getElementById("myerror1");
+      mainContainer1.innerHTML = '';
+
+      div1.innerText = "city #1 is blank";
+      mainContainer1.appendChild(div1);   
+
+      //blank results
+      let div2 = document.createElement("div");
+      let mainContainer2 = document.getElementById("myResult1");
+      mainContainer2.innerHTML = '';
+
+      div2.innerText = "";
+      mainContainer2.appendChild(div2);   
+
+      let div3 = document.createElement("div");
+      let mainContainer3 = document.getElementById("myResult2");
+      mainContainer3.innerHTML = '';
+
+      div3.innerText = "";
+      mainContainer2.appendChild(div3);   
+      
+      if (city2 === '') {
+         let div = document.createElement("div");
+         let mainContainer = document.getElementById("myerror2");
+         mainContainer.innerHTML = '';
+
+         div.innerText = "city #2 is blank";
+         mainContainer.appendChild(div);   
+      }
+      else {
+         let div = document.createElement("div");
+         let mainContainer = document.getElementById("myerror2");
+         mainContainer.innerHTML = '';
+
+         div.innerText = "";
+         mainContainer.appendChild(div);  
+      }
+
+      return;
+    }
+    else if (city2 === '') {
+      //print error
+      let div1 = document.createElement("div");
+      let mainContainer1 = document.getElementById("myerror2");
+      mainContainer1.innerHTML = '';
+
+      div1.innerText = "city #2 is blank";
+      mainContainer1.appendChild(div1);   
+
+      //blank results
+      let div2 = document.createElement("div");
+      let mainContainer2 = document.getElementById("myResult1");
+      mainContainer2.innerHTML = '';
+
+      div2.innerText = "";
+      mainContainer2.appendChild(div2);   
+
+      let div3 = document.createElement("div");
+      let mainContainer3 = document.getElementById("myResult2");
+      mainContainer3.innerHTML = '';
+
+      div3.innerText = "";
+      mainContainer2.appendChild(div3);   
+
+      if (city1 === '') {
+         let div = document.createElement("div");
+         let mainContainer = document.getElementById("myerror1");
+         mainContainer.innerHTML = '';
+
+         div.innerText = "city #1 is blank";
+         mainContainer.appendChild(div);   
+      }
+      else {
+         let div = document.createElement("div");
+         let mainContainer = document.getElementById("myerror1");
+         mainContainer.innerHTML = '';
+
+         div.innerText = "";
+         mainContainer.appendChild(div);   
+         
+      }
+
+      return;
+    }
+    else {
+      var div1 = document.createElement("div");
+      let mainContainer1 = document.getElementById("myerror1");
+      mainContainer1.innerHTML = '';
+
+      div1.innerText = "";
+      mainContainer1.appendChild(div1);   
+
+      var div2 = document.createElement("div");
+      var mainContainer2 = document.getElementById("myerror2");
+      mainContainer2.innerHTML = '';
+
+      div2.innerText = "";
+      mainContainer2.appendChild(div2); 
+    }
 
     const city1url = 'https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&city=' + city1 + '&order_by=lastUpdated&dumpRaw=false';
 
@@ -85,20 +187,26 @@ function App() {
     
     return (
     <div id="myData">
-    <h2>Air quality data between two cities (CH4 PPM)</h2>
+    <h2>Air quality data between two US cities (CH4 PPM)</h2>
     <br />
     <form onSubmit={handleSubmit}>
-    City #1 : <Input placeholder='City 1' id="city1" name="city1" value={city1} onChange={event => setCity1(event.target.value)} />
+    &nbsp;&nbsp;ex. Chicago, New York, Boston
     <br />
-    City #2 : <Input placeholder='City 2' id="city2" name="city2" value={city2} onChange={event => setCity2(event.target.value)}/>
+    City #1 : <Input placeholder='' id="city1" name="city1" value={city1} onChange={event => setCity1(event.target.value)} />
+    <div id="myerror1">
+    </div>
+    <br />
+    City #2 : <Input placeholder='' id="city2" name="city2" value={city2} onChange={event => setCity2(event.target.value)}/>
+    <div id="myerror2">
+    </div>
     <br />
     <br />
     <button type="submit">submit</button>
     </form>
     <br />
-    <div id="myInner1">
+    <div id="myResult1">
     </div>
-    <div id="myInner2">
+    <div id="myResult2">
     </div>
 
  
