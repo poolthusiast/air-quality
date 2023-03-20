@@ -49,112 +49,74 @@ function App() {
 
    }
 
-};
+   };
+
+   function show_message(divID, messagetext) {
+      let div1 = document.createElement("div");
+      let mainContainer1 = document.getElementById(divID);
+      mainContainer1.innerHTML = '';
+
+      div1.innerText = messagetext;
+      mainContainer1.appendChild(div1);   
+   }
 
   const handleSubmit = event => {
     event.preventDefault();
 
+    //error handling
     if (city1 === '') {
       //print error
-      let div1 = document.createElement("div");
-      let mainContainer1 = document.getElementById("myerror1");
-      mainContainer1.innerHTML = '';
+      show_message("myerror1", "city #1 is blank");
 
-      div1.innerText = "city #1 is blank";
-      mainContainer1.appendChild(div1);   
 
       //blank results
-      let div2 = document.createElement("div");
-      let mainContainer2 = document.getElementById("myResult1");
-      mainContainer2.innerHTML = '';
+      show_message("myResult1", "");
 
-      div2.innerText = "";
-      mainContainer2.appendChild(div2);   
 
-      let div3 = document.createElement("div");
-      let mainContainer3 = document.getElementById("myResult2");
-      mainContainer3.innerHTML = '';
-
-      div3.innerText = "";
-      mainContainer2.appendChild(div3);   
+      show_message("myResult2", "");
+ 
       
       if (city2 === '') {
-         let div = document.createElement("div");
-         let mainContainer = document.getElementById("myerror2");
-         mainContainer.innerHTML = '';
-
-         div.innerText = "city #2 is blank";
-         mainContainer.appendChild(div);   
+         show_message("myerror2", "city #2 is blank");
+ 
       }
       else {
-         let div = document.createElement("div");
-         let mainContainer = document.getElementById("myerror2");
-         mainContainer.innerHTML = '';
+         show_message("myerror2", "");
 
-         div.innerText = "";
-         mainContainer.appendChild(div);  
       }
 
       return;
     }
     else if (city2 === '') {
       //print error
-      let div1 = document.createElement("div");
-      let mainContainer1 = document.getElementById("myerror2");
-      mainContainer1.innerHTML = '';
+      show_message("myerror2", "city #2 is blank");
 
-      div1.innerText = "city #2 is blank";
-      mainContainer1.appendChild(div1);   
 
       //blank results
-      let div2 = document.createElement("div");
-      let mainContainer2 = document.getElementById("myResult1");
-      mainContainer2.innerHTML = '';
+      show_message("myResult1", "");
 
-      div2.innerText = "";
-      mainContainer2.appendChild(div2);   
 
-      let div3 = document.createElement("div");
-      let mainContainer3 = document.getElementById("myResult2");
-      mainContainer3.innerHTML = '';
+      show_message("myResult2", "");
 
-      div3.innerText = "";
-      mainContainer2.appendChild(div3);   
 
       if (city1 === '') {
-         let div = document.createElement("div");
-         let mainContainer = document.getElementById("myerror1");
-         mainContainer.innerHTML = '';
+         show_message("myerror1", "city #1 is blank");
 
-         div.innerText = "city #1 is blank";
-         mainContainer.appendChild(div);   
       }
       else {
-         let div = document.createElement("div");
-         let mainContainer = document.getElementById("myerror1");
-         mainContainer.innerHTML = '';
+         show_message("myerror1", "");
 
-         div.innerText = "";
-         mainContainer.appendChild(div);   
          
       }
 
       return;
     }
     else {
-      var div1 = document.createElement("div");
-      let mainContainer1 = document.getElementById("myerror1");
-      mainContainer1.innerHTML = '';
+      show_message("myerror1", "");
 
-      div1.innerText = "";
-      mainContainer1.appendChild(div1);   
 
-      var div2 = document.createElement("div");
-      var mainContainer2 = document.getElementById("myerror2");
-      mainContainer2.innerHTML = '';
+      show_message("myerror2", "");
 
-      div2.innerText = "";
-      mainContainer2.appendChild(div2); 
     }
 
     const city1url = 'https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&city=' + city1 + '&order_by=lastUpdated&dumpRaw=false';
@@ -192,11 +154,11 @@ function App() {
     <form onSubmit={handleSubmit}>
     &nbsp;&nbsp;ex. Chicago, New York, Boston
     <br />
-    City #1 : <Input placeholder='' id="city1" name="city1" value={city1} onChange={event => setCity1(event.target.value)} />
+    City #1 : <Input placeholder='City' id="city1" name="city1" value={city1} onChange={event => setCity1(event.target.value)} />
     <div id="myerror1">
     </div>
     <br />
-    City #2 : <Input placeholder='' id="city2" name="city2" value={city2} onChange={event => setCity2(event.target.value)}/>
+    City #2 : <Input placeholder='City' id="city2" name="city2" value={city2} onChange={event => setCity2(event.target.value)}/>
     <div id="myerror2">
     </div>
     <br />
